@@ -1,5 +1,5 @@
 # mail_to_misp-docker
-Docker container for mail_to_misp MISP module
+Docker container for [mail_to_misp MISP module](https://github.com/MISP/mail_to_misp)
 
 # Running container
 1. Clone this repo to your machine
