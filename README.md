@@ -10,5 +10,5 @@ docker build . -t "M2M"
 ```
 4. Run container with port 25 open
 ```
-docker run --rm -p 25:25 mtm
+docker run --rm -p 25:25 m2m
 ```
