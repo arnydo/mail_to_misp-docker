@@ -37,7 +37,7 @@ COPY mail_to_misp_config.py mail_to_misp_config.py
 RUN ln -s mail_to_misp_config.py fake_smtp_config.py
 
 # Supervisord Setup
-RUN echo '[supervisord]' >> /etc/supervisor/conf.d/supervisord.conf
+RUN echo '[supervisord]' > /etc/supervisor/conf.d/supervisord.conf
 RUN echo 'nodaemon = true' >> /etc/supervisor/conf.d/supervisord.conf
 RUN echo '' >> /etc/supervisor/conf.d/supervisord.conf
 RUN echo '[program:fake_smtp]' >> /etc/supervisor/conf.d/supervisord.conf
@@ -46,9 +46,15 @@ RUN echo 'user = root' >> /etc/supervisor/conf.d/supervisord.conf
 RUN echo 'startsecs = 0' >> /etc/supervisor/conf.d/supervisord.conf
 RUN echo 'autorestart = false' >> /etc/supervisor/conf.d/supervisord.conf
 
+COPY run.sh /run.sh
+
 WORKDIR /root/mail_to_misp
 VOLUME /root/mail_to_misp
 USER root
-CMD sh -c "/usr/bin/python3 fake_smtp.py"
+
+ENTRYPOINT [ "/bin/bash" ]
+
+CMD ["/run.sh"]
+#CMD sh -c "/usr/bin/python3 fake_smtp.py"
 
 EXPOSE 25/TCP
